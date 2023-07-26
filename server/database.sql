@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS public.device
     dev_name character varying(60),
     dev_type integer,
     dev_status integer,
-    veh_desc character varying(255),
+    dev_desc character varying(255),
     CONSTRAINT device_pkey PRIMARY KEY (dev_id)
 );
 
