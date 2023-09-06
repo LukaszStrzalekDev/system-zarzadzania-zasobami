@@ -56,13 +56,13 @@ app.post("/Rooms", async (req, res) => {
 // 1. get device
 // 2. add device
 
-app.post("/device", async (req, res) => {
+app.post("/Devices", async (req, res) => {
   try {
     console.log(req.body);
-    const { dev_name, dev_type, dev_status, dev_desc } = req.body;
+    const { NameD, Description, Available } = req.body;
     const newDevice = await pool.query(
-      "INSERT INTO device (dev_name,dev_type,dev_status,dev_desc) VALUES ($1, $2, $3, $4) RETURNING *",
-      [dev_name, dev_type, dev_status, dev_desc]
+      "INSERT INTO Devices (NameD, Description, Available) VALUES ($1, $2, $3) RETURNING *",
+      [NameD, Description, Available]
     );
     res.json(newDevice.rows[0]);
   } catch (err) {
@@ -78,41 +78,32 @@ app.post("/device", async (req, res) => {
 // 3. update user
 // 4. add OAuser
 
-app.post("/oa_user", async (req, res) => {
+app.post("/Users", async (req, res) => {
   try {
     console.log(req.body);
-    const { user_name, user_email, user_type, user_photo, user_desc } =
-      req.body;
-    const newOA_user = await pool.query(
-      "INSERT INTO oa_user (user_name, user_email, user_type, user_photo, user_desc) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [user_name, user_email, user_type, user_photo, user_desc]
+    const { GoogleID, FirstName, LastName, Email } = req.body;
+    const newUsers = await pool.query(
+      "INSERT INTO Users (GoogleID, FirstName, LastName, Email) VALUES ($1, $2, $3, $4) RETURNING *",
+      [GoogleID, FirstName, LastName, Email]
     );
-    res.json(newOA_user.rows[0]);
+    res.json(newUsers.rows[0]);
   } catch (err) {
     console.error(err.message);
   }
 });
-
-// 1. get gtype
 
 // 1. get reservation status
 
 // 1. get reservation
 // 2. add reservation
 
-app.post("/reservation", async (req, res) => {
+app.post("/Reservations", async (req, res) => {
   try {
     console.log(req.body);
-    const {
-      res_id_user,
-      res_id_gtype,
-      res_id_status,
-      res_start_data,
-      res_end_data,
-    } = req.body;
+    const { UserID, ResourceID, StartTime, EndTime } = req.body;
     const newReservation = await pool.query(
-      "INSERT INTO reservation (res_id_user, res_id_gtype, res_id_status, res_start_data, res_end_data) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [res_id_user, res_id_gtype, res_id_status, res_start_data, res_end_data]
+      "INSERT INTO Reservations (UserID, ResourceID, StartTime, EndTime) VALUES ($1, $2, $3, $4) RETURNING *",
+      [UserID, ResourceID, StartTime, EndTime]
     );
     res.json(newReservation.rows[0]);
   } catch (err) {
