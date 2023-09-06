@@ -10,40 +10,20 @@ app.use(express.json()); //req.body
 
 // ---    ROUTES
 
-// 1. get vehicle type
-
-// 2. add vehicle type
-
-app.post("/vehicle_type", async (req, res) => {
-  try {
-    const { vehtype_name, vehtype_desc } = req.body;
-    const newVehicleType = await pool.query(
-      "INSERT INTO vehicle_type (vehtype_name, vehtype_desc) VALUES ($1, $2) RETURNING *",
-      [vehtype_name, vehtype_desc]
-    );
-    res.json(newVehicleType.rows[0]);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-// 3. delete vehicle type
-// 4. update vehicle type
-
 // 1. get vehicle status
 
 // 1. get vehicle
 
 // 2. add vehicle
 
-app.post("/vehicle", async (req, res) => {
+app.post("/Vehicles", async (req, res) => {
   try {
     console.log(req.body);
-    const { veh_name, veh_marc, veh_type, veh_status, veh_plate, veh_desc } =
+    const { Brand, TypeV, Model, Color, Plate, Description, Available } =
       req.body;
     const newVehicle = await pool.query(
-      "INSERT INTO vehicle (veh_name, veh_marc, veh_type, veh_status, veh_plate, veh_desc) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-      [veh_name, veh_marc, veh_type, veh_status, veh_plate, veh_desc]
+      "INSERT INTO Vehicles (Brand, TypeV, Model, Color, Plate, Description, Available) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+      [Brand, TypeV, Model, Color, Plate, Description, Available]
     );
     res.json(newVehicle.rows[0]);
   } catch (err) {
@@ -53,38 +33,16 @@ app.post("/vehicle", async (req, res) => {
 // 3. delete vehicle
 // 4. update vehicle
 
-// 1. get room type
-// 2. add room type
-
-app.post("/room_type", async (req, res) => {
-  try {
-    console.log(req.body);
-    const { roomtype_name, roomtype_desc } = req.body;
-    const newRoom_type = await pool.query(
-      "INSERT INTO room_type (roomtype_name, roomtype_desc) VALUES ($1, $2) RETURNING *",
-      [roomtype_name, roomtype_desc]
-    );
-    res.json(newRoom_type.rows[0]);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-// 3. delete room type
-// 4. update room type
-
-// 1. get room status
-
 // 1. get room
 // 2. add room
 
-app.post("/room", async (req, res) => {
+app.post("/Rooms", async (req, res) => {
   try {
     console.log(req.body);
-    const { room_name, room_type, room_status, room_desc } = req.body;
+    const { NameR, Description, Capacity, Available } = req.body;
     const newRoom = await pool.query(
-      "INSERT INTO room (room_name, room_type, room_status, room_desc) VALUES ($1, $2, $3, $4) RETURNING *",
-      [room_name, room_type, room_status, room_desc]
+      "INSERT INTO Rooms (NameR, Description, Capacity, Available) VALUES ($1, $2, $3, $4) RETURNING *",
+      [NameR, Description, Capacity, Available]
     );
     res.json(newRoom.rows[0]);
   } catch (err) {
@@ -94,28 +52,6 @@ app.post("/room", async (req, res) => {
 
 // 3. delete room
 // 4. update room
-
-// 1. get device type
-// 2. add device type
-
-app.post("/device_type", async (req, res) => {
-  try {
-    console.log(req.body);
-    const { devtype_name } = req.body;
-    const newDevice_type = await pool.query(
-      "INSERT INTO device_type (devtype_name) VALUES ($1) RETURNING *",
-      [devtype_name]
-    );
-    res.json(newDevice_type.rows[0]);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-// 3. delete device type
-// 4. update device type
-
-// 1. get device status
 
 // 1. get device
 // 2. add device
